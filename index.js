@@ -1,12 +1,13 @@
 var express = require('express'),
     app = express(),
-    bodyParser=require('body-parser');
-app.use(express.static(__dirname+"/public"));
+    bodyParser = require('body-parser');
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 app.get('/', function (req, res) {
-    res.send(req.body.challenge);
-});
-app.post('/', function (req, res) {
     res.send("Server running");
 });
-app.listen(process.env.PORT||7000);
+app.post('/', function (req, res) {
+    res.send(req.body.challenge);
+
+});
+app.listen(process.env.PORT || 7000);
