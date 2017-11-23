@@ -4,7 +4,7 @@ var express = require('express'),
 app.use(express.static(__dirname+"/public"));
 app.use(bodyParser.json());
 app.get('/', function (req, res) {
-    res.send("Server running");
+    res.send(req.body.challenge);
 });
 app.post('/', function (req, res) {
     res.send("Server running");
