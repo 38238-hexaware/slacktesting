@@ -9,7 +9,7 @@ var path = require('path');
 var fs = require('fs');
 var xlsxj = require("xlsx-to-json");
 var upload = multer({ storage: storage }).single('userPhoto');
-process.env["SLACK_BOT_TOKEN"] = 'xoxb-277028834658-7L9UE36MaolP8SPWaJRIGf9b';
+process.env["SLACK_BOT_TOKEN"] = 'xoxb-277333830325-wQSmktjUfOibAiKA9YSHKQDW';
 var bot_token = process.env.SLACK_BOT_TOKEN || '';
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,11 +25,11 @@ rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
     //     // console.log(c.name);
     //     if (c.name === 'general') { channel = c.id }
     // }
-    channel = 'C851FA6TU';
+    channel = 'D859TQG21';
     console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
 });
 rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
-    rtm.sendMessage("Hi", channel);
+    rtm.sendMessage(`Hi`, channel);
 });
 rtm.on(RTM_EVENTS.MESSAGE, function (message) {
     if (message.channel === channel) {
