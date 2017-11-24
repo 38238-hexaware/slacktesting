@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse" style="border-radius:0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Slack Bot</a>
+            </div>
+            <!--<ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>-->
+        </div>
+    </nav>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Slack Testing</div>
+            <div class="panel-body">
+                <label>Enter utterance</label>
+                <input type="text" class="form-control sendmessage" required name="sendmessage" />
+                <label>Expected Output</label>
+                <input type="text" class="form-control expected" name="expected" id="expected" />
+                </br>
+                <input type="button" class="btn btn-danger utterances-submit" value="send" /><br/><br/>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered" style="border: 1px solid black">
+        <tr>
+            <th id="action">Action</th>
+            <th id="expected">Expected Output</th>
+            <th id="actual">Actual Output</th>
+        </tr>
+        <tbody id="append-body">
+
+        </tbody>
+    </table>
+    <script src="./jquery-3.2.1.js"></script>
+    <script>
+        $(function () {
+            $(".utterances-submit").click(function (event) {
+                let utterance = $(".sendmessage").val();
+                $.ajax({
+                    url: "/api",
+                    type: "POST",
+                    data: {
+                        'utterance': utterance
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        $("#append-body").append(`<tr><td>${utterance}</td><td>${$(".expected").val()}</td><td>${result.text}</td></tr>`);
+                    }
+                });
+                event.preventDefault();
+            });
+        })
+    </script>
+</body>
+
+</html>
