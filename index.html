@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/bootstrap.css">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                 <label>Expected Output</label>
                 <input type="text" class="form-control expected" name="expected" id="expected" />
                 </br>
-                <input type="button" class="btn btn-danger utterances-submit" value="send" /><br/><br/>
+                <button type="button" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing" class="btn btn-danger utterances-submit">Send</button><br/><br/>
             </div>
         </div>
     </div>
@@ -48,9 +48,12 @@
         </tbody>
     </table>
     <script src="./jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
         $(function () {
             $(".utterances-submit").click(function (event) {
+                var $this = $(this);
+                $this.button('loading');
                 let utterance = $(".sendmessage").val();
                 $.ajax({
                     url: "/api",
@@ -61,6 +64,7 @@
                     success: function (result) {
                         console.log(result);
                         $("#append-body").append(`<tr><td>${utterance}</td><td>${$(".expected").val()}</td><td>${result.text}</td></tr>`);
+                        $this.button('reset');
                     }
                 });
                 event.preventDefault();
