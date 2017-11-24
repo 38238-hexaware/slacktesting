@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-inverse" style="border-radius:0px;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -24,6 +25,12 @@
         </div>
     </nav>
     <div class="container">
+        <div class="alert alert-danger">
+            <strong>Warning!</strong> Server not connected.
+        </div>
+        <div class="alert alert-success">
+            <strong>Warning!</strong> Server Connected.
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">Slack Testing</div>
             <div class="panel-body">
@@ -36,7 +43,15 @@
             </div>
         </div>
     </div>
+    <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+        <div class="container">
+            <input type="file" class="col-md-2" name="userPhoto" />
+            <input type="submit" class="btn btn-primary btn-sm col-md-1" style="padding:5px 10px" value="Upload" name="submit">
+        </div>
 
+    </form>
+    <br/>
+    <div class="container">
     <table class="table table-bordered" style="border: 1px solid black">
         <tr>
             <th id="action">Action</th>
@@ -47,10 +62,13 @@
 
         </tbody>
     </table>
+    </div>
     <script src="./jquery-3.2.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
         $(function () {
+            $(".alert-danger").show();
+            $(".alert-success").hide();
             $(".utterances-submit").click(function (event) {
                 var $this = $(this);
                 $this.button('loading');
